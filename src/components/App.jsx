@@ -1,6 +1,6 @@
 import { Component } from 'react';
 // import { getPixabayImages } from '../../src/services/api';
-
+//
 export class App extends Component {
   render() {
     return (
