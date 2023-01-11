@@ -1,5 +1,18 @@
-export const ImageGallery = () => {
+import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
+import css from './ImageGallery.module.css';
+
+export const ImageGallery = ({ images }) => {
   return (
-    <ul className="gallery">{/* <!-- Набор <li> с изображениями --> */}</ul>
+    <ul className={css.ImageGallery}>
+      {images.map(({ id, webformatURL, largeImageURL }) => {
+        return (
+          <ImageGalleryItem
+            key={id}
+            webformatURL={webformatURL}
+            largeImageURL={largeImageURL}
+          />
+        );
+      })}
+    </ul>
   );
 };

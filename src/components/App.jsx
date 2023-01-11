@@ -22,6 +22,9 @@ export class App extends Component {
 
   async componentDidUpdate(_, prevState) {
     if (prevState.query !== this.state.query) {
+      this.setState({
+        isLoading: true,
+      });
       try {
         const { hits, totalHits } = await getPixabayImages(
           this.state.query,
@@ -33,6 +36,8 @@ export class App extends Component {
         });
       } catch (error) {
         this.setState({ error: error });
+      } finally {
+        this.setState({ isLoading: false });
       }
     }
   }
