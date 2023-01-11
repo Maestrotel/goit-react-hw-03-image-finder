@@ -3,13 +3,13 @@ import css from './Searchbar.module.css';
 
 export class Searchbar extends Component {
   state = {
-    q: 0,
+    query: ' ',
   };
 
   render() {
     return (
       <header className={css.Searchbar}>
-        <form className={css.SearchForm}>
+        <form className={css.SearchForm} onSubmit={this.handleSubmit}>
           <button type="submit" className={css.SearchFormButton}>
             <span className={css.SearchFormButtonLabel}>Search</span>
           </button>
