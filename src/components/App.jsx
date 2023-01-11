@@ -3,7 +3,7 @@ import { Button } from './Button/Button';
 import { Loader } from './Loader/Loader';
 import { Searchbar } from './Searchbar/Searchbar';
 import { ImageGallery } from './ImageGallery/ImageGallery';
-// import { getPixabayImages } from '../../src/services/api';
+import { getPixabayImages } from '../../src/services/api';
 
 export class App extends Component {
   state = {
@@ -16,15 +16,26 @@ export class App extends Component {
     error: null,
   };
 
-  async componentDidUpdate(_, prevState) {
-    if (prevState.query !== this.state.query)
-      console.log('query string has changed');
-  }
-
   handleSubmit = query => {
     this.setState({ query });
-    console.log(query);
   };
+
+  async componentDidUpdate(_, prevState) {
+    if (prevState.query !== this.state.query) {
+      try {
+        const { hits, totalHits } = await getPixabayImages(
+          this.state.query,
+          this.state.page
+        );
+        this.setState({
+          images: [...this.state.images, ...hits],
+          totalHits: totalHits,
+        });
+      } catch (error) {
+        this.setState({ error: error });
+      }
+    }
+  }
 
   render() {
     return (
