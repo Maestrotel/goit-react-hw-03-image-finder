@@ -17,11 +17,14 @@ export class App extends Component {
   };
 
   handleSubmit = query => {
-    this.setState({ query });
+    this.setState({ query, page: 1 });
   };
 
   async componentDidUpdate(_, prevState) {
-    if (prevState.query !== this.state.query) {
+    if (
+      prevState.query !== this.state.query ||
+      prevState.page !== this.state.page
+    ) {
       this.setState({
         isLoading: true,
       });
@@ -42,13 +45,18 @@ export class App extends Component {
     }
   }
 
+  handleLoadMore = () => {
+    this.setState(prevState => ({ page: prevState.page + 1 }));
+  };
+
   render() {
     return (
       <>
         <Searchbar onSubmit={this.handleSubmit} />
         <ImageGallery images={this.state.images} />
-        <Loader />
-        <Button />
+        {this.state.isLoading && <Loader />}
+
+        <Button onLoadMore={this.handleLoadMore} />
       </>
     );
   }
