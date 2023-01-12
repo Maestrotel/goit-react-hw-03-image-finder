@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { createPortal } from 'react-dom';
+import css from './Modal.module.css';
 
 export class Modal extends Component {
   handleBackdrop = e => {
@@ -20,8 +21,8 @@ export class Modal extends Component {
 
   render() {
     return createPortal(
-      <div className="overlay" onClick={this.handleBackdrop}>
-        <div className="modal">
+      <div className={css.Overlay} onClick={this.handleBackdrop}>
+        <div className={css.Modal}>
           <img src={this.props.largeImageURL} alt="modal" />
         </div>
       </div>,
