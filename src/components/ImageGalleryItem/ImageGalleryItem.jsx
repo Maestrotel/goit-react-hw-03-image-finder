@@ -1,33 +1,33 @@
 // import PropTypes from 'prop-types';
 import css from './ImageGalleryItem.module.css';
-// import { Modal } from '../Modal/Modal';
+import { Modal } from '../Modal/Modal';
 import { Component } from 'react';
 
 export class ImageGalleryItem extends Component {
   state = {
-    isModalOpen: false,
+    isModalShown: false,
   };
 
-  // onToggleModal = () => {
-  //   this.setState({
-  //     isModalOpen: !this.state.isModalOpen,
-  //   });
-  // };
+  onSwitchModal = () => {
+    this.setState({ isModalShown: !this.state.isModalShown });
+    // this.setState(prevState => ({!isModalShown: prevState.isModalShown }));
+  };
 
   render() {
     return (
-      <li className={css.ImageGalleryItem} onClick={this.onToggleModal}>
+      <li className={css.ImageGalleryItem}>
         <img
+          onClick={this.onSwitchModal}
           className={css.ImageGalleryItemImage}
           src={this.props.webformatURL}
-          alt=""
+          alt="img"
         />
-        {/* {this.state.isModalOpen && (
+        {this.state.isModalShown && (
           <Modal
             largeImageURL={this.props.largeImageURL}
-            onClose={this.onToggleModal}
+            onClose={this.onSwitchModal}
           />
-        )} */}
+        )}
       </li>
     );
   }

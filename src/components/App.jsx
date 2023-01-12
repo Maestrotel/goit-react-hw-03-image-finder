@@ -34,7 +34,8 @@ export class App extends Component {
           this.state.page
         );
         this.setState({
-          images: [...this.state.images, ...hits],
+          images:
+            this.state.page === 1 ? hits : [...this.state.images, ...hits],
           totalHits: totalHits,
         });
       } catch (error) {
