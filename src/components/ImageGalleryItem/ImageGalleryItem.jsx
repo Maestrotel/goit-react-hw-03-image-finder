@@ -9,8 +9,8 @@ export class ImageGalleryItem extends Component {
   };
 
   onSwitchModal = () => {
-    this.setState({ isModalShown: !this.state.isModalShown });
-    // this.setState(prevState => ({!isModalShown: prevState.isModalShown }));
+    // this.setState({ isModalShown: !this.state.isModalShown });
+    this.setState(prevState => ({ isModalShown: !prevState.isModalShown }));
   };
 
   render() {

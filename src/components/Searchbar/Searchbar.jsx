@@ -3,7 +3,7 @@ import css from './Searchbar.module.css';
 
 export class Searchbar extends Component {
   state = {
-    query: ' ',
+    query: '',
   };
 
   handleSubmit = e => {
@@ -19,6 +19,10 @@ export class Searchbar extends Component {
     });
   };
 
+  handleChange = e => {
+    this.setState({ query: e.target.value });
+  };
+
   render() {
     return (
       <header className={css.Searchbar}>
@@ -28,6 +32,7 @@ export class Searchbar extends Component {
           </button>
 
           <input
+            onChange={this.handleChange}
             className={css.SearchFormInput}
             type="text"
             autoComplete="off"

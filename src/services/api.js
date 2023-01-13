@@ -14,6 +14,7 @@ const receiveImages = axios.create({
 });
 
 export const getPixabayImages = async (query, page) => {
-  const { data } = await receiveImages.get(`?q=${query}&page=${page}`);
+  // const { data } = await receiveImages.get(`?q=${query}&page=${page}`);
+  const { data } = await receiveImages.get('', { params: { q: query, page } });
   return data;
 };
