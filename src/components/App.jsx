@@ -5,6 +5,7 @@ import { Searchbar } from './Searchbar/Searchbar';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { getPixabayImages } from '../../src/services/api';
 import css from '../components/App.module.css';
+import { Notify } from 'notiflix';
 
 export class App extends Component {
   state = {
@@ -12,7 +13,6 @@ export class App extends Component {
     page: 1,
     query: '',
     totalHits: null,
-    largeImageURL: '',
     isLoading: false,
     error: null,
   };
@@ -34,13 +34,21 @@ export class App extends Component {
           this.state.query,
           this.state.page
         );
-        this.setState({
-          images:
-            this.state.page === 1 ? hits : [...this.state.images, ...hits],
+        if (totalHits === 0) {
+          Notify.warning('Please enter correct data!');
+        }
+        // this.setState({
+        //   images:
+        //     this.state.page === 1 ? hits : [...this.state.images, ...hits],
+        //   totalHits: totalHits,
+        // });
+        this.setState(prevState => ({
+          images: prevState.page === 1 ? hits : [...prevState.images, ...hits],
           totalHits: totalHits,
-        });
+        }));
       } catch (error) {
         this.setState({ error: error });
+        Notify.failure('Something went wrong');
       } finally {
         this.setState({ isLoading: false });
       }

@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import css from './Searchbar.module.css';
 import PropTypes from 'prop-types';
+import { Notify } from 'notiflix';
 
 export class Searchbar extends Component {
   state = {
@@ -11,7 +12,7 @@ export class Searchbar extends Component {
     e.preventDefault();
 
     if (this.state.query === '') {
-      return;
+      Notify.info('Please fill up!');
     }
 
     this.props.onSubmit(this.state.query);
@@ -39,6 +40,7 @@ export class Searchbar extends Component {
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
+            value={this.state.query}
           />
         </form>
       </header>
